@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clinica Medicare | Lead Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#12243d;--navy2:#1d3554;--orange:#ed6a19;--bg:#f5f6f8;--white:#fff;--text:#172033;--muted:#6b7280;--border:#e5e7eb;--green:#15803d;--red:#b91c1c}
+body{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+button,input,select,textarea{font:inherit}button{cursor:pointer}
+.app{min-height:100vh;display:flex}.sidebar{width:245px;position:fixed;inset:0 auto 0 0;background:var(--navy);color:#fff;display:flex;flex-direction:column;z-index:20}
+.brand{padding:25px 20px;border-bottom:1px solid #ffffff18}.brand-name{font-size:21px;font-weight:800}.brand-sub{font-size:12px;color:#aebbd0;margin-top:5px}
+.nav{padding:18px 12px}.nav-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#8393aa;padding:0 10px 8px}.nav-item{width:100%;border:0;background:#ffffff10;color:#fff;padding:11px 12px;border-radius:7px;text-align:left;font-size:13px;font-weight:700}
+.account{margin-top:auto;padding:16px;border-top:1px solid #ffffff18}.account-label{font-size:10px;color:#8393aa;text-transform:uppercase}.email{font-size:12px;color:#d8e0eb;margin:5px 0 12px;word-break:break-word}.logout{width:100%;border:1px solid #ffffff22;background:transparent;color:#fff;padding:9px;border-radius:6px;font-weight:700}
+.main{margin-left:245px;width:calc(100% - 245px);min-height:100vh}.top{height:76px;background:#fff;border-bottom:1px solid var(--border);padding:0 26px;display:flex;align-items:center;justify-content:space-between}.title{font-size:22px;font-weight:800;color:var(--navy)}.sub{font-size:12px;color:var(--muted);margin-top:3px}.connection{font-size:11px;font-weight:700;color:var(--green);display:flex;gap:7px;align-items:center}.dot{width:7px;height:7px;border-radius:50%;background:#22c55e}
+.content{padding:25px 26px 40px}.error{display:none;background:#fef2f2;color:var(--red);border:1px solid #fecaca;padding:11px 13px;border-radius:7px;margin-bottom:18px;font-size:12px}.error.show{display:block}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:13px;margin-bottom:22px}.stat{background:#fff;border:1px solid var(--border);border-radius:9px;padding:16px 17px}.stat:first-child{border-top:3px solid var(--orange)}.stat-label{font-size:11px;color:var(--muted);font-weight:700}.stat-value{font-size:24px;color:var(--navy);font-weight:800;margin-top:6px}
+.card{background:#fff;border:1px solid var(--border);border-radius:9px;overflow:hidden}.card-head{padding:17px 19px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:12px}.section-title{font-size:16px;font-weight:800;color:var(--navy)}.count{font-size:12px;color:var(--muted);margin-left:6px}.refresh{border:1px solid var(--border);background:#fff;color:var(--navy);padding:8px 12px;border-radius:6px;font-size:12px;font-weight:700}
+.filters{padding:13px 19px;border-bottom:1px solid var(--border);display:flex;gap:10px}.search{flex:1}.search input,.filter{width:100%;height:38px;border:1px solid #d9dee7;border-radius:6px;padding:0 10px;outline:none;background:#fff;font-size:12px}.filter{width:190px}.search input:focus,.filter:focus{border-color:var(--orange)}
+.table-wrap{overflow-x:auto}table{width:100%;min-width:1200px;border-collapse:collapse}th{background:#fafbfc;color:#697386;font-size:10px;text-transform:uppercase;letter-spacing:.5px;text-align:left;padding:12px 13px;border-bottom:1px solid var(--border);white-space:nowrap}td{padding:12px 13px;border-bottom:1px solid #edf0f3;font-size:12px;vertical-align:middle}tr:hover td{background:#fcfcfd}.name{font-weight:800;color:var(--navy)}.phone{font-size:11px;color:var(--muted);margin-top:2px}.concern{max-width:160px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.stage{display:inline-block;background:#fff7ed;color:#c2410c;border-radius:5px;padding:4px 7px;font-size:10px;font-weight:800;white-space:nowrap}.status{display:inline-block;border-radius:20px;padding:5px 8px;font-size:10px;font-weight:800;white-space:nowrap}.s-new{background:#eff6ff;color:#1d4ed8}.s-contacted{background:#f3f4f6;color:#374151}.s-interested{background:#ecfdf5;color:#047857}.s-follow_up_required{background:#fff7ed;color:#c2410c}.s-consultation_booked{background:#f5f3ff;color:#6d28d9}.s-not_interested{background:#fef2f2;color:#b91c1c}.s-no_response{background:#fefce8;color:#a16207}.s-converted{background:#dcfce7;color:#166534}.s-closed{background:#f1f5f9;color:#475569}.photo-btn,.view-btn{border:1px solid #d9dee7;background:#fff;color:var(--navy);border-radius:5px;padding:6px 8px;font-size:10px;font-weight:800}.photo-btn:hover,.view-btn:hover{border-color:var(--orange);color:var(--orange)}.wa-small{display:inline-flex;background:#168c45;color:#fff;text-decoration:none;border-radius:5px;padding:6px 8px;font-size:10px;font-weight:800}
+.empty{text-align:center;padding:45px 15px;color:var(--muted)}.empty strong{display:block;color:var(--navy);margin-bottom:5px}
+.overlay{display:none;position:fixed;inset:0;background:#0a142399;z-index:100;padding:18px;align-items:center;justify-content:center}.overlay.show{display:flex}.modal{width:min(920px,100%);max-height:94vh;overflow:auto;background:#fff;border-radius:10px;box-shadow:0 25px 70px #0004}.modal-head{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}.modal-title{font-size:17px;font-weight:800;color:var(--navy)}.modal-sub{font-size:11px;color:var(--muted);margin-top:3px}.close{width:31px;height:31px;border:0;border-radius:50%;background:#f3f4f6;font-size:18px}.body{padding:20px}.section{margin-bottom:22px}.section:last-child{margin-bottom:0}.section h3{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--navy);border-bottom:1px solid var(--border);padding-bottom:8px;margin-bottom:12px}.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.info{background:#f9fafb;border:1px solid #edf0f3;border-radius:7px;padding:10px}.label{font-size:9px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);font-weight:800}.value{font-size:12px;color:var(--navy);font-weight:700;margin-top:4px;word-break:break-word}.wa{display:inline-flex;margin-top:8px;background:#168c45;color:#fff;text-decoration:none;padding:8px 11px;border-radius:6px;font-size:11px;font-weight:800}
+.photo-box{border:1px solid var(--border);border-radius:8px;background:#fafbfc;padding:13px;text-align:center}.photo{display:none;max-width:100%;max-height:320px;border-radius:7px;object-fit:contain;background:#f1f3f5;margin:auto}.photo-placeholder{min-height:130px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px}.photo-actions{margin-top:12px;display:flex;justify-content:center;gap:8px;flex-wrap:wrap}.upload-label{display:inline-flex;align-items:center;justify-content:center;border:1px solid #d9dee7;background:#fff;color:var(--navy);padding:8px 11px;border-radius:6px;font-size:11px;font-weight:800;cursor:pointer}.upload-label:hover{border-color:var(--orange);color:var(--orange)}.upload-label input{display:none}.photo-note{font-size:10px;color:var(--muted);margin-top:7px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:flex;flex-direction:column;gap:5px}.field.full{grid-column:1/-1}.field label{font-size:10px;color:#475569;font-weight:800}.field input,.field select,.field textarea{width:100%;border:1px solid #d9dee7;border-radius:6px;padding:9px 10px;outline:none;background:#fff;color:var(--text);font-size:12px}.field textarea{min-height:85px;resize:vertical}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--orange)}
+.footer{padding:14px 20px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:8px;align-items:center}.save-msg{margin-right:auto;color:var(--green);font-size:11px;font-weight:700}.cancel,.save{border:0;border-radius:6px;padding:9px 14px;font-size:11px;font-weight:800}.cancel{background:#eef0f3;color:#475569}.save{background:var(--orange);color:#fff}.save:disabled{opacity:.6;cursor:not-allowed}
+.loading{position:fixed;inset:0;background:#fff;z-index:200;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:9px}.loading.hide{display:none}.spinner{width:32px;height:32px;border:3px solid #e5e7eb;border-top-color:var(--orange);border-radius:50%;animation:spin .75s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:1150px){.stats{grid-template-columns:repeat(3,1fr)}}@media(max-width:800px){.sidebar{width:210px}.main{margin-left:210px;width:calc(100% - 210px)}.info-grid{grid-template-columns:1fr 1fr}}@media(max-width:650px){.app{display:block}.sidebar{position:static;width:100%;min-height:auto}.nav,.account{display:none}.brand{padding:18px}.main{width:100%;margin:0}.top{min-height:70px;height:auto;padding:15px}.content{padding:16px}.stats{grid-template-columns:1fr 1fr}.filters{flex-direction:column}.filter{width:100%}.form-grid,.info-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.overlay{padding:8px}.modal{max-height:96vh}}
+</style>
+</head>
+<body>
+
+<div id="loading" class="loading">
+  <div class="spinner"></div>
+  <strong style="color:#12243d;font-size:14px">Loading Clinica Medicare</strong>
+  <span style="font-size:11px;color:#6b7280">Connecting to leads</span>
+</div>
+
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-name">Clinica Medicare</div>
+      <div class="brand-sub">Hair Test Lead Management</div>
+    </div>
+    <div class="nav">
+      <div class="nav-label">Workspace</div>
+      <button class="nav-item" type="button">Lead Dashboard</button>
+    </div>
+    <div class="account">
+      <div class="account-label">Signed in as</div>
+      <div id="adminEmail" class="email">Loading...</div>
+      <button id="logoutBtn" class="logout" type="button">Logout</button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="top">
+      <div>
+        <div class="title">Lead Dashboard</div>
+        <div class="sub">Manage Hair Test enquiries and patient follow-ups</div>
+      </div>
+      <div class="connection"><span class="dot"></span><span id="connectionText">Connecting...</span></div>
+    </header>
+
+    <div class="content">
+      <div id="errorBox" class="error"></div>
+
+      <section class="stats">
+        <div class="stat"><div class="stat-label">Total Leads</div><div id="totalLeads" class="stat-value">0</div></div>
+        <div class="stat"><div class="stat-label">New Leads</div><div id="newLeads" class="stat-value">0</div></div>
+        <div class="stat"><div class="stat-label">Follow-up Required</div><div id="followupLeads" class="stat-value">0</div></div>
+        <div class="stat"><div class="stat-label">Interested</div><div id="interestedLeads" class="stat-value">0</div></div>
+        <div class="stat"><div class="stat-label">Converted</div><div id="convertedLeads" class="stat-value">0</div></div>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <div><span class="section-title">Hair Test Leads</span><span id="leadCount" class="count">0 leads</span></div>
+          <button id="refreshBtn" class="refresh" type="button">Refresh</button>
+        </div>
+
+        <div class="filters">
+          <div class="search"><input id="searchInput" type="text" placeholder="Search by name, WhatsApp, city or concern..."></div>
+          <select id="statusFilter" class="filter">
+            <option value="all">All Status</option>
+            <option value="new">New Lead</option>
+            <option value="contacted">Contacted</option>
+            <option value="interested">Interested</option>
+            <option value="follow_up_required">Follow-up Required</option>
+            <option value="consultation_booked">Consultation Booked</option>
+            <option value="not_interested">Not Interested</option>
+            <option value="no_response">No Response</option>
+            <option value="converted">Converted</option>
+            <option value="closed">Closed</option>
+          </select>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>WhatsApp Number</th>
+                <th>City</th>
+                <th>Age Group</th>
+                <th>Main Concern</th>
+                <th>Selected Hair Stage</th>
+                <th>Scalp Photo</th>
+                <th>Call Status</th>
+                <th>Remark</th>
+                <th>Next Follow-up</th>
+                <th>Last Contacted</th>
+                <th>WhatsApp</th>
+              </tr>
+            </thead>
+            <tbody id="leadsBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+
+<div id="modalOverlay" class="overlay">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <div id="modalName" class="modal-title">Lead Details</div>
+        <div class="modal-sub">Review patient information and update telecaller follow-up</div>
+      </div>
+      <button id="closeModal" class="close" type="button">×</button>
+    </div>
+
+    <div class="body">
+      <section class="section">
+        <h3>Lead Information</h3>
+        <div class="info-grid">
+          <div class="info"><div class="label">Name</div><div id="detailName" class="value">-</div></div>
+          <div class="info"><div class="label">WhatsApp Number</div><div id="detailPhone" class="value">-</div><a id="whatsappBtn" class="wa" href="#" target="_blank" rel="noopener">WhatsApp</a></div>
+          <div class="info"><div class="label">City</div><div id="detailCity" class="value">-</div></div>
+          <div class="info"><div class="label">Age Group</div><div id="detailAge" class="value">-</div></div>
+          <div class="info"><div class="label">Main Concern</div><div id="detailConcern" class="value">-</div></div>
+          <div class="info"><div class="label">Selected Hair Stage</div><div id="detailStage" class="value">-</div></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h3>Scalp Photo</h3>
+        <div class="photo-box">
+          <div id="photoPlaceholder" class="photo-placeholder">No scalp photo uploaded</div>
+          <img id="scalpPhoto" class="photo" src="" alt="Patient scalp photo">
+          <div class="photo-actions">
+            <a id="photoLink" class="photo-btn" href="#" target="_blank" rel="noopener" style="display:none">View Full Photo</a>
+            <label class="upload-label">
+              Update Scalp Photo
+              <input id="photoInput" type="file" accept="image/jpeg,image/png,image/webp">
+            </label>
+          </div>
+          <div id="photoNote" class="photo-note">JPG, PNG or WEBP. Telecaller can upload a replacement photo.</div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h3>Telecaller Follow-up</h3>
+        <div class="form-grid">
+          <div class="field">
+            <label for="callStatus">Call Status</label>
+            <select id="callStatus">
+              <option value="new">New Lead</option>
+              <option value="contacted">Contacted</option>
+              <option value="interested">Interested</option>
+              <option value="follow_up_required">Follow-up Required</option>
+              <option value="consultation_booked">Consultation Booked</option>
+              <option value="not_interested">Not Interested</option>
+              <option value="no_response">No Response</option>
+              <option value="converted">Converted</option>
+              <option value="closed">Closed</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="nextFollowUp">Next Follow-up</label>
+            <input id="nextFollowUp" type="datetime-local">
+          </div>
+          <div class="field full">
+            <label for="remark">Remark / Call Notes</label>
+            <textarea id="remark" placeholder="Enter important call notes, patient response or next action..."></textarea>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h3>Contact History</h3>
+        <div class="info-grid">
+          <div class="info"><div class="label">Last Contacted</div><div id="detailLastContacted" class="value">Not contacted yet</div></div>
+          <div class="info"><div class="label">Lead Created</div><div id="detailCreated" class="value">-</div></div>
+        </div>
+      </section>
+    </div>
+
+    <div class="footer">
+      <div id="saveMessage" class="save-msg"></div>
+      <button id="cancelBtn" class="cancel" type="button">Cancel</button>
+      <button id="saveBtn" class="save" type="button">Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   SUPABASE
+   IMPORTANT: Keep this exactly the same as the working
+   admin.js project until both files are updated together.
+========================================================= */
+
+const SUPABASE_URL =
+    "https://stejywpaxavvmjkzndwh.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_KxxqH7WDzoB6aI4MuBcUpA_XAWnVr0K";
+
+const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY,
+    {
+        auth: {
+            persistSession: true,
+            autoRefreshToken: true,
+            detectSessionInUrl: false,
+            storageKey: "clinica-medicare-admin-auth"
+        }
+    }
+);
+
+const TABLE = "hair_assessment";
+const BUCKET = "patient-scalp-photos";
+
+let allLeads = [];
+let filteredLeads = [];
+let selectedLead = null;
+let pendingPhotoFile = null;
+
+const $ = id => document.getElementById(id);
+
+function escapeHtml(value) {
+  if (value === null || value === undefined) return "";
+  return String(value)
+    .replace(/&/g,"&amp;").replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;").replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+function formatDate(value) {
+  if (!value) return "-";
+  const d = new Date(value);
+  if (Number.isNaN(d.getTime())) return "-";
+  return d.toLocaleString("en-IN", {
+    day:"2-digit", month:"short", year:"numeric",
+    hour:"2-digit", minute:"2-digit"
+  });
+}
+
+function dateTimeLocal(value) {
+  if (!value) return "";
+  const d = new Date(value);
+  if (Number.isNaN(d.getTime())) return "";
+  const pad = n => String(n).padStart(2,"0");
+  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
+
+function normalizePhone(phone) {
+  return phone ? String(phone).replace(/\D/g,"") : "";
+}
+
+function statusName(status) {
+  return ({
+    new:"New Lead",
+    contacted:"Contacted",
+    interested:"Interested",
+    follow_up_required:"Follow-up Required",
+    consultation_booked:"Consultation Booked",
+    not_interested:"Not Interested",
+    no_response:"No Response",
+    converted:"Converted",
+    closed:"Closed"
+  })[status] || "New Lead";
+}
+
+function showError(message) {
+  $("errorBox").textContent = message;
+  $("errorBox").classList.add("show");
+}
+
+function hideError() {
+  $("errorBox").textContent = "";
+  $("errorBox").classList.remove("show");
+}
+
+async function getAdminSession() {
+  await new Promise(resolve => setTimeout(resolve, 500));
+
+  let { data, error } = await supabaseClient.auth.getSession();
+  if (error) throw error;
+
+  if (data.session) return data.session;
+
+  try {
+    const refreshed = await supabaseClient.auth.refreshSession();
+    if (refreshed.data && refreshed.data.session) {
+      return refreshed.data.session;
+    }
+  } catch (_) {}
+
+  const userResult = await supabaseClient.auth.getUser().catch(() => null);
+  if (userResult && userResult.data && userResult.data.user) {
+    const again = await supabaseClient.auth.getSession();
+    if (again.data && again.data.session) return again.data.session;
+  }
+
+  return null;
+}
+
+async function checkAuth() {
+  const session = await getAdminSession();
+
+  if (!session) {
+    window.location.replace("admin.html");
+    return false;
+  }
+
+  $("adminEmail").textContent = session.user.email || "Admin";
+  return true;
+}
+
+function photoPathFromValue(value) {
+  if (!value) return null;
+
+  const raw = String(value).trim();
+  if (!raw) return null;
+
+  if (/^https?:\/\//i.test(raw) || /^data:image\//i.test(raw)) {
+    return { url: raw, path: null };
+  }
+
+  let path = raw;
+  const marker = `/storage/v1/object/public/${BUCKET}/`;
+  if (raw.includes(marker)) {
+    path = raw.split(marker)[1];
+  }
+
+  const privateMarker = `/storage/v1/object/sign/${BUCKET}/`;
+  if (raw.includes(privateMarker)) {
+    path = raw.split(privateMarker)[1].split("?")[0];
+  }
+
+  return { url: null, path: decodeURIComponent(path.replace(/^\/+/,"")) };
+}
+
+async function resolvePhoto(value) {
+  const parsed = photoPathFromValue(value);
+  if (!parsed) return null;
+  if (parsed.url) return parsed.url;
+
+  const { data, error } = await supabaseClient.storage
+    .from(BUCKET)
+    .createSignedUrl(parsed.path, 3600);
+
+  if (error) {
+    console.error("Photo URL error:", error);
+    return null;
+  }
+
+  return data && data.signedUrl ? data.signedUrl : null;
+}
+
+function updateStats() {
+  const count = s => allLeads.filter(x => (x.call_status || "new") === s).length;
+  $("totalLeads").textContent = allLeads.length;
+  $("newLeads").textContent = count("new");
+  $("followupLeads").textContent = count("follow_up_required");
+  $("interestedLeads").textContent = count("interested");
+  $("convertedLeads").textContent = count("converted");
+}
+
+async function loadLeads() {
+  hideError();
+  $("leadsBody").innerHTML = `<tr><td colspan="12"><div class="empty">Loading leads...</div></td></tr>`;
+
+  try {
+    const { data, error } = await supabaseClient
+      .from(TABLE)
+      .select("*")
+      .order("created_at", { ascending:false });
+
+    if (error) throw error;
+
+    allLeads = data || [];
+    updateStats();
+    applyFilters();
+
+    $("connectionText").textContent = "Connected";
+  } catch (error) {
+    console.error(error);
+    $("connectionText").textContent = "Disconnected";
+    showError("Leads load nahi ho pa rahe: " + (error.message || "Unknown error"));
+    $("leadsBody").innerHTML = `<tr><td colspan="12"><div class="empty"><strong>Unable to load leads</strong>${escapeHtml(error.message || "Unknown error")}</div></td></tr>`;
+  }
+}
+
+function applyFilters() {
+  const q = $("searchInput").value.trim().toLowerCase();
+  const status = $("statusFilter").value;
+
+  filteredLeads = allLeads.filter(lead => {
+    const searchable = [
+      lead.full_name, lead.whatsapp_number, lead.city,
+      lead.age_group, lead.main_concern, lead.selected_stage,
+      lead.remark
+    ].filter(Boolean).join(" ").toLowerCase();
+
+    return (!q || searchable.includes(q)) &&
+           (status === "all" || (lead.call_status || "new") === status);
+  });
+
+  renderLeads();
+}
+
+async function renderLeads() {
+  $("leadCount").textContent = `${filteredLeads.length} ${filteredLeads.length === 1 ? "lead" : "leads"}`;
+
+  if (!filteredLeads.length) {
+    $("leadsBody").innerHTML = `<tr><td colspan="12"><div class="empty"><strong>No leads found</strong>Try changing your search or filter.</div></td></tr>`;
+    return;
+  }
+
+  $("leadsBody").innerHTML = filteredLeads.map((lead,index) => {
+    const status = lead.call_status || "new";
+    const phone = normalizePhone(lead.whatsapp_number);
+    const wa = phone ? `https://wa.me/${phone}` : "#";
+
+    return `
+      <tr>
+        <td><div class="name">${escapeHtml(lead.full_name || "-")}</div></td>
+        <td>${escapeHtml(lead.whatsapp_number || "-")}</td>
+        <td>${escapeHtml(lead.city || "-")}</td>
+        <td>${escapeHtml(lead.age_group || "-")}</td>
+        <td><div class="concern">${escapeHtml(lead.main_concern || "-")}</div></td>
+        <td><span class="stage">${escapeHtml(lead.selected_stage || "-")}</span></td>
+        <td><button class="photo-btn" type="button" onclick="openLead(${index})">👁️ View</button></td>
+        <td><span class="status s-${escapeHtml(status)}">${escapeHtml(statusName(status))}</span></td>
+        <td><div class="concern">${escapeHtml(lead.remark || "-")}</div></td>
+        <td>${escapeHtml(formatDate(lead.next_follow_up))}</td>
+        <td>${escapeHtml(formatDate(lead.last_contacted_at))}</td>
+        <td>${phone ? `<a class="wa-small" href="${wa}" target="_blank" rel="noopener">WhatsApp</a>` : "-"}</td>
+      </tr>
+    `;
+  }).join("");
+}
+
+async function openLead(index) {
+  selectedLead = filteredLeads[index];
+  pendingPhotoFile = null;
+  if (!selectedLead) return;
+
+  $("modalName").textContent = selectedLead.full_name || "Lead Details";
+  $("detailName").textContent = selectedLead.full_name || "-";
+  $("detailPhone").textContent = selectedLead.whatsapp_number || "-";
+  $("detailCity").textContent = selectedLead.city || "-";
+  $("detailAge").textContent = selectedLead.age_group || "-";
+  $("detailConcern").textContent = selectedLead.main_concern || "-";
+  $("detailStage").textContent = selectedLead.selected_stage || "-";
+  $("detailLastContacted").textContent = selectedLead.last_contacted_at ? formatDate(selectedLead.last_contacted_at) : "Not contacted yet";
+  $("detailCreated").textContent = formatDate(selectedLead.created_at);
+
+  const phone = normalizePhone(selectedLead.whatsapp_number);
+  $("whatsappBtn").style.display = phone ? "inline-flex" : "none";
+  if (phone) $("whatsappBtn").href = `https://wa.me/${phone}`;
+
+  $("callStatus").value = selectedLead.call_status || "new";
+  $("remark").value = selectedLead.remark || "";
+  $("nextFollowUp").value = dateTimeLocal(selectedLead.next_follow_up);
+  $("saveMessage").textContent = "";
+  $("photoInput").value = "";
+
+  $("photoPlaceholder").style.display = "flex";
+  $("scalpPhoto").style.display = "none";
+  $("photoLink").style.display = "none";
+  $("photoNote").textContent = "Loading scalp photo...";
+
+  $("modalOverlay").classList.add("show");
+
+  const url = await resolvePhoto(selectedLead.scalp_photo);
+
+  if (url) {
+    $("scalpPhoto").src = url;
+    $("scalpPhoto").style.display = "block";
+    $("photoPlaceholder").style.display = "none";
+    $("photoLink").href = url;
+    $("photoLink").style.display = "inline-flex";
+    $("photoNote").textContent = "Current scalp photo. Select another image to replace it.";
+  } else {
+    $("photoNote").textContent = "No scalp photo found. Telecaller can upload one.";
+  }
+}
+
+async function uploadPhoto(file, leadId) {
+  if (!file) return null;
+
+  if (!["image/jpeg","image/png","image/webp"].includes(file.type)) {
+    throw new Error("Only JPG, PNG or WEBP images are allowed.");
+  }
+
+  if (file.size > 10 * 1024 * 1024) {
+    throw new Error("Photo must be smaller than 10 MB.");
+  }
+
+  const extension = file.name.split(".").pop().toLowerCase();
+  const path = `${leadId}/${Date.now()}.${extension}`;
+
+  const { error: uploadError } = await supabaseClient.storage
+    .from(BUCKET)
+    .upload(path, file, {
+      cacheControl: "3600",
+      upsert: false,
+      contentType: file.type
+    });
+
+  if (uploadError) throw uploadError;
+
+  return path;
+}
+
+$("photoInput").addEventListener("change", async event => {
+  const file = event.target.files && event.target.files[0];
+  if (!file) return;
+
+  pendingPhotoFile = file;
+
+  const preview = URL.createObjectURL(file);
+  $("scalpPhoto").src = preview;
+  $("scalpPhoto").style.display = "block";
+  $("photoPlaceholder").style.display = "none";
+  $("photoLink").style.display = "none";
+  $("photoNote").textContent = "New photo selected. Click Save Changes to upload it.";
+});
+
+$("saveBtn").addEventListener("click", async () => {
+  if (!selectedLead) return;
+
+  $("saveBtn").disabled = true;
+  $("saveBtn").textContent = "Saving...";
+  $("saveMessage").textContent = "";
+
+  try {
+    const status = $("callStatus").value;
+    const remark = $("remark").value.trim();
+    const follow = $("nextFollowUp").value;
+    const now = new Date().toISOString();
+
+    const updates = {
+      call_status: status,
+      remark: remark || null,
+      next_follow_up: follow ? new Date(follow).toISOString() : null,
+      last_contacted_at: now,
+      updated_at: now
+    };
+
+    if (pendingPhotoFile) {
+      $("saveMessage").textContent = "Uploading photo...";
+      const path = await uploadPhoto(pendingPhotoFile, selectedLead.id);
+      updates.scalp_photo = path;
+    }
+
+    const { error } = await supabaseClient
+      .from(TABLE)
+      .update(updates)
+      .eq("id", selectedLead.id);
+
+    if (error) throw error;
+
+    allLeads = allLeads.map(lead =>
+      lead.id === selectedLead.id ? {...lead, ...updates} : lead
+    );
+    selectedLead = {...selectedLead, ...updates};
+
+    updateStats();
+    applyFilters();
+
+    $("detailLastContacted").textContent = formatDate(now);
+    $("saveMessage").textContent = "Saved successfully";
+
+    if (updates.scalp_photo) {
+      const newUrl = await resolvePhoto(updates.scalp_photo);
+      if (newUrl) {
+        $("scalpPhoto").src = newUrl;
+        $("photoLink").href = newUrl;
+        $("photoLink").style.display = "inline-flex";
+      }
+    }
+
+    pendingPhotoFile = null;
+    $("photoInput").value = "";
+
+    setTimeout(closeModal, 700);
+  } catch (error) {
+    console.error("Update error:", error);
+    $("saveMessage").textContent = "Update failed";
+    alert("Lead update nahi hua.\n\n" + (error.message || "Unknown error"));
+  } finally {
+    $("saveBtn").disabled = false;
+    $("saveBtn").textContent = "Save Changes";
+  }
+});
+
+function closeModal() {
+  $("modalOverlay").classList.remove("show");
+  selectedLead = null;
+  pendingPhotoFile = null;
+}
+
+$("closeModal").addEventListener("click", closeModal);
+$("cancelBtn").addEventListener("click", closeModal);
+$("modalOverlay").addEventListener("click", e => {
+  if (e.target === $("modalOverlay")) closeModal();
+});
+
+$("searchInput").addEventListener("input", applyFilters);
+$("statusFilter").addEventListener("change", applyFilters);
+
+$("refreshBtn").addEventListener("click", async () => {
+  $("refreshBtn").disabled = true;
+  $("refreshBtn").textContent = "Refreshing...";
+  await loadLeads();
+  $("refreshBtn").disabled = false;
+  $("refreshBtn").textContent = "Refresh";
+});
+
+$("logoutBtn").addEventListener("click", async () => {
+  $("logoutBtn").disabled = true;
+  $("logoutBtn").textContent = "Logging out...";
+  const {error} = await supabaseClient.auth.signOut();
+  if (error) {
+    alert("Logout failed: " + error.message);
+    $("logoutBtn").disabled = false;
+    $("logoutBtn").textContent = "Logout";
+    return;
+  }
+  window.location.replace("admin.html");
+});
+
+supabaseClient.auth.onAuthStateChange(event => {
+  if (event === "SIGNED_OUT") {
+    window.location.replace("admin.html");
+  }
+});
+
+async function initialize() {
+  try {
+    const authenticated = await checkAuth();
+    if (!authenticated) return;
+    await loadLeads();
+  } catch (error) {
+    console.error("Dashboard error:", error);
+    showError("Dashboard load nahi ho paya: " + (error.message || "Unknown error"));
+  } finally {
+    $("loading").classList.add("hide");
+  }
+}
+
+initialize();
+</script>
+</body>
+</html>
