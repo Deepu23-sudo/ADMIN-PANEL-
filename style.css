@@ -1,0 +1,4872 @@
+/* =====================================================
+   CLINICA MEDICARE®
+   2-MINUTE HAIR ASSESSMENT
+   MOBILE-FIRST DESIGN
+===================================================== */
+
+:root {
+
+    --navy: #092c4c;
+    --navy-dark: #061f38;
+    --navy-soft: #173e61;
+
+    --orange: #ff6b1a;
+    --orange-dark: #e95708;
+    --orange-soft: #fff0e8;
+
+    --white: #ffffff;
+    --off-white: #f7f9fb;
+    --light: #eef3f7;
+    --line: #dce5ec;
+
+    --text: #102c48;
+    --muted: #667588;
+
+    --success: #16a66a;
+    --danger: #d83a3a;
+
+    --shadow-sm:
+        0 8px 24px rgba(9, 44, 76, 0.06);
+
+    --shadow-md:
+        0 18px 45px rgba(9, 44, 76, 0.10);
+
+    --shadow-lg:
+        0 28px 70px rgba(9, 44, 76, 0.15);
+
+    --radius-sm: 12px;
+    --radius-md: 20px;
+    --radius-lg: 30px;
+
+    --container: 1240px;
+}
+
+
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    background: var(--white);
+    color: var(--text);
+    font-family: "Inter", sans-serif;
+    overflow-x: hidden;
+}
+
+button,
+input,
+select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+img,
+video {
+    display: block;
+    max-width: 100%;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.site-header {
+    position: relative;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.96);
+    border-bottom: 1px solid rgba(9, 44, 76, 0.08);
+}
+
+.header-inner {
+    width: min(100% - 32px, var(--container));
+    min-height: 76px;
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+}
+
+.brand-logo {
+    width: auto;
+    height: 48px;
+    object-fit: contain;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.language-switch {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 4px;
+
+    border: 1px solid var(--line);
+    border-radius: 999px;
+
+    background: var(--white);
+}
+
+.language-btn {
+    min-width: 42px;
+    height: 32px;
+
+    border: 0;
+    border-radius: 999px;
+
+    background: transparent;
+    color: var(--muted);
+
+    font-size: 12px;
+    font-weight: 800;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+.language-btn.active {
+    background: var(--navy);
+    color: var(--white);
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero-section {
+    position: relative;
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 80% 30%,
+            rgba(255, 107, 26, 0.07),
+            transparent 30%
+        ),
+        linear-gradient(
+            180deg,
+            #ffffff 0%,
+            #f6f9fc 100%
+        );
+
+    padding: 26px 16px 0;
+}
+
+.hero-shell {
+    position: relative;
+
+    width: min(100%, var(--container));
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+
+    align-items: center;
+
+    gap: 38px;
+
+    min-height: 630px;
+}
+
+.hero-copy {
+    position: relative;
+    z-index: 3;
+
+    padding: 36px 0 52px;
+}
+
+.hero-brand-line {
+    display: inline-flex;
+    align-items: center;
+
+    margin-bottom: 18px;
+
+    color: var(--navy);
+
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+}
+
+.hero-brand-line::before {
+    content: "";
+
+    width: 28px;
+    height: 2px;
+
+    margin-right: 10px;
+
+    background: var(--orange);
+}
+
+.hero-title {
+    max-width: 690px;
+
+    color: var(--navy);
+
+    font-family: "Manrope", sans-serif;
+
+    font-size: clamp(42px, 5.2vw, 74px);
+
+    line-height: 0.98;
+
+    letter-spacing: -0.055em;
+
+    font-weight: 800;
+}
+
+.hero-title-line {
+    display: block;
+}
+
+.hero-title-accent {
+    display: block;
+
+    color: var(--orange);
+}
+
+.hero-description {
+    max-width: 590px;
+
+    margin-top: 24px;
+
+    color: #41556c;
+
+    font-size: 18px;
+    line-height: 1.65;
+}
+
+.hero-actions {
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+
+    max-width: 500px;
+
+    margin-top: 28px;
+}
+
+.hero-primary-btn,
+.hero-secondary-btn {
+    min-height: 58px;
+
+    border-radius: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 14px 20px;
+
+    font-size: 15px;
+    font-weight: 800;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.hero-primary-btn {
+    border: 1px solid var(--orange);
+
+    background: var(--orange);
+    color: var(--white);
+
+    box-shadow:
+        0 12px 28px rgba(255, 107, 26, 0.20);
+}
+
+.hero-primary-btn:hover {
+    transform: translateY(-2px);
+
+    background: var(--orange-dark);
+
+    box-shadow:
+        0 16px 34px rgba(255, 107, 26, 0.25);
+}
+
+.button-arrow {
+    margin-left: 10px;
+
+    font-size: 20px;
+}
+
+.hero-secondary-btn {
+    border: 1px solid #9eb0c1;
+
+    background: transparent;
+    color: var(--navy);
+}
+
+.hero-secondary-btn:hover {
+    background: var(--white);
+
+    box-shadow: var(--shadow-sm);
+}
+
+.plan-icon {
+    margin-right: 10px;
+    font-size: 17px;
+}
+
+.hero-benefits {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 18px;
+
+    margin-top: 28px;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    color: var(--navy);
+}
+
+.benefit-icon {
+    width: 38px;
+    height: 38px;
+
+    display: grid;
+    place-items: center;
+
+    border: 1px solid #d9e4ed;
+    border-radius: 50%;
+
+    background: #f2f7fb;
+
+    color: var(--navy);
+
+    font-size: 19px;
+}
+
+.benefit-item span:last-child {
+    display: flex;
+    flex-direction: column;
+}
+
+.benefit-item strong {
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.benefit-item small {
+    color: var(--muted);
+
+    font-size: 12px;
+    line-height: 1.3;
+}
+
+
+/* =====================================================
+   HERO VIDEO
+===================================================== */
+
+.hero-visual {
+    position: relative;
+
+    min-height: 570px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-visual::before {
+    content: "";
+
+    position: absolute;
+
+    width: 480px;
+    height: 680px;
+
+    right: -160px;
+    top: -20px;
+
+    background: var(--navy);
+
+    border-radius: 48% 0 0 48%;
+
+    transform: rotate(7deg);
+
+    opacity: 0.98;
+}
+
+.hero-video-card {
+    position: relative;
+    z-index: 3;
+
+    width: min(100%, 570px);
+
+    aspect-ratio: 0.86 / 1;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 32px;
+
+    background: var(--navy);
+
+    box-shadow: var(--shadow-lg);
+}
+
+.hero-video {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.video-overlay-bottom {
+    position: absolute;
+
+    inset: auto 0 0 0;
+
+    height: 32%;
+
+    background:
+        linear-gradient(
+            180deg,
+            transparent,
+            rgba(0, 0, 0, 0.45)
+        );
+
+    pointer-events: none;
+}
+
+.video-badge {
+    position: absolute;
+    z-index: 5;
+
+    top: 18px;
+    right: 18px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 12px 15px;
+
+    border-radius: 16px;
+
+    background: rgba(255, 255, 255, 0.96);
+
+    color: var(--navy);
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.12);
+
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.video-badge small {
+    display: block;
+
+    margin-top: 2px;
+
+    font-size: 10px;
+    letter-spacing: 0.05em;
+}
+
+.video-badge-icon {
+    font-size: 21px;
+}
+
+.video-play-indicator {
+    position: absolute;
+    z-index: 6;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: 64px;
+    height: 64px;
+
+    display: grid;
+    place-items: center;
+
+    border: 2px solid rgba(255, 255, 255, 0.95);
+    border-radius: 50%;
+
+    background: rgba(9, 44, 76, 0.28);
+
+    color: var(--white);
+
+    backdrop-filter: blur(8px);
+
+    font-size: 20px;
+}
+
+.video-feature-stack {
+    position: absolute;
+    z-index: 7;
+
+    right: -10px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.video-feature-card {
+    width: 150px;
+    min-height: 70px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 11px 13px;
+
+    border-radius: 16px;
+
+    background: rgba(255, 255, 255, 0.96);
+
+    box-shadow:
+        0 12px 30px rgba(9, 44, 76, 0.14);
+
+    color: var(--navy);
+
+    font-size: 11px;
+    line-height: 1.3;
+}
+
+.video-feature-card span {
+    flex: 0 0 auto;
+
+    width: 32px;
+    height: 32px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+
+    background: var(--orange-soft);
+
+    color: var(--orange);
+
+    font-size: 16px;
+}
+
+
+/* =====================================================
+   HERO STATS
+===================================================== */
+
+.hero-stats {
+    position: relative;
+    z-index: 8;
+
+    width: min(100%, 820px);
+
+    margin: -16px auto 0;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    background: rgba(255, 255, 255, 0.96);
+
+    border: 1px solid #e1e9ef;
+
+    border-radius: 22px;
+
+    box-shadow: var(--shadow-md);
+
+    overflow: hidden;
+}
+
+.hero-stat {
+    min-height: 96px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    padding: 15px;
+
+    border-right: 1px solid #e2e9ef;
+}
+
+.hero-stat:last-child {
+    border-right: 0;
+}
+
+.stat-icon {
+    width: 42px;
+    height: 42px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+
+    background: var(--orange-soft);
+
+    color: var(--orange);
+
+    font-size: 19px;
+}
+
+.hero-stat span:last-child {
+    display: flex;
+    flex-direction: column;
+}
+
+.hero-stat strong {
+    color: var(--navy);
+
+    font-size: 25px;
+    line-height: 1;
+
+    font-weight: 800;
+}
+
+.hero-stat small {
+    margin-top: 4px;
+
+    color: var(--muted);
+
+    font-size: 11px;
+}
+
+
+/* =====================================================
+   HAIR TEST SECTION
+===================================================== */
+
+.hair-test-section {
+    padding: 90px 16px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff 0%,
+            #f7f9fb 100%
+        );
+}
+
+.test-container {
+    width: min(100%, 1120px);
+
+    margin: 0 auto;
+}
+
+.progress-wrapper {
+    max-width: 800px;
+
+    margin: 0 auto 42px;
+}
+
+.progress-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 9px;
+
+    color: var(--muted);
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 0.08em;
+}
+
+.progress-track {
+    width: 100%;
+    height: 5px;
+
+    overflow: hidden;
+
+    border-radius: 999px;
+
+    background: #e4ebf1;
+}
+
+.progress-bar {
+    width: 20%;
+    height: 100%;
+
+    border-radius: inherit;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--orange),
+            #ff9b5e
+        );
+
+    transition: width 0.35s ease;
+}
+
+
+/* =====================================================
+   TEST STEPS
+===================================================== */
+
+.test-step {
+    display: none;
+
+    animation: stepIn 0.35s ease both;
+}
+
+.test-step.active {
+    display: block;
+}
+
+@keyframes stepIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+.step-heading {
+    max-width: 760px;
+
+    margin-bottom: 32px;
+}
+
+.step-pill {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 7px 13px;
+
+    margin-bottom: 14px;
+
+    border-radius: 999px;
+
+    background: var(--orange-soft);
+    color: var(--orange-dark);
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 0.06em;
+}
+
+.step-heading h2,
+.lead-heading h2 {
+    color: var(--navy);
+
+    font-family: "Manrope", sans-serif;
+
+    font-size: clamp(30px, 4vw, 52px);
+
+    line-height: 1.05;
+
+    letter-spacing: -0.035em;
+
+    font-weight: 800;
+}
+
+.step-heading p,
+.lead-heading p {
+    margin-top: 13px;
+
+    color: var(--muted);
+
+    font-size: 16px;
+    line-height: 1.65;
+}
+
+
+/* =====================================================
+   GENDER
+===================================================== */
+
+.gender-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 20px;
+}
+
+.gender-card {
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 0;
+
+    border: 1px solid var(--line);
+    border-radius: 24px;
+
+    background: var(--white);
+
+    text-align: left;
+
+    box-shadow: var(--shadow-sm);
+
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.gender-card:hover {
+    transform: translateY(-3px);
+
+    border-color: var(--orange);
+
+    box-shadow: var(--shadow-md);
+}
+
+.gender-card-image {
+    min-height: 250px;
+
+    display: grid;
+    place-items: center;
+
+    color: rgba(255, 255, 255, 0.95);
+
+    font-size: 110px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--navy),
+            #31597a
+        );
+}
+
+.gender-woman {
+    background:
+        linear-gradient(
+            135deg,
+            #173e61,
+            #587b98
+        );
+}
+
+.gender-card-content {
+    padding: 22px 24px 26px;
+}
+
+.gender-card-content h3 {
+    color: var(--navy);
+
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.gender-card-content p {
+    margin-top: 7px;
+
+    color: var(--muted);
+
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.selection-arrow {
+    position: absolute;
+
+    right: 20px;
+    bottom: 22px;
+
+    width: 38px;
+    height: 38px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+
+    background: var(--orange-soft);
+
+    color: var(--orange);
+
+    font-weight: 800;
+}
+
+
+/* =====================================================
+   DURATION
+===================================================== */
+
+.duration-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+.duration-card {
+    position: relative;
+
+    min-height: 170px;
+
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 28px;
+
+    border: 1px solid var(--line);
+    border-radius: 24px;
+
+    background: var(--white);
+
+    text-align: left;
+
+    box-shadow: var(--shadow-sm);
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.duration-card:hover {
+    transform: translateY(-3px);
+
+    border-color: var(--orange);
+
+    box-shadow: var(--shadow-md);
+}
+
+.duration-number {
+    width: 52px;
+    height: 52px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+
+    background: var(--orange-soft);
+
+    color: var(--orange-dark);
+
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.duration-card h3 {
+    color: var(--navy);
+
+    font-size: 21px;
+    font-weight: 800;
+}
+
+.duration-card p {
+    margin-top: 7px;
+
+    color: var(--muted);
+
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+
+/* =====================================================
+   STAGE
+===================================================== */
+
+.stage-heading-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 30px;
+
+    margin-bottom: 30px;
+}
+
+.not-sure-box {
+    flex: 0 0 290px;
+
+    display: flex;
+    align-items: flex-start;
+
+    gap: 12px;
+
+    padding: 18px;
+
+    border: 1px solid var(--line);
+    border-radius: 18px;
+
+    background: var(--white);
+}
+
+.not-sure-icon {
+    width: 34px;
+    height: 34px;
+
+    display: grid;
+    place-items: center;
+
+    flex: 0 0 auto;
+
+    border-radius: 50%;
+
+    background: var(--orange-soft);
+
+    color: var(--orange);
+
+    font-weight: 800;
+}
+
+.not-sure-box strong {
+    display: block;
+
+    color: var(--navy);
+
+    font-size: 14px;
+}
+
+.not-sure-box span:last-child {
+    display: block;
+
+    margin-top: 4px;
+
+    color: var(--muted);
+
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.stage-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 16px;
+}
+
+.stage-card {
+    position: relative;
+
+    overflow: hidden;
+
+    border: 1px solid var(--line);
+    border-radius: 20px;
+
+    background: var(--white);
+
+    text-align: left;
+
+    box-shadow: 0 5px 20px rgba(9, 44, 76, 0.04);
+
+    transition:
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.stage-card:hover,
+.stage-card.selected {
+    border-color: var(--orange);
+
+    box-shadow:
+        0 14px 32px rgba(255, 107, 26, 0.12);
+}
+
+.stage-card:hover {
+    transform: translateY(-2px);
+}
+
+.stage-card.selected {
+    transform: translateY(-2px);
+}
+
+.stage-image-wrap {
+    position: relative;
+
+    aspect-ratio: 1.45 / 1;
+
+    overflow: hidden;
+
+    background: #f0f3f5;
+}
+
+.stage-image {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.stage-selected-check {
+    position: absolute;
+
+    top: 12px;
+    right: 12px;
+
+    width: 34px;
+    height: 34px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+
+    background: var(--orange);
+
+    color: var(--white);
+
+    font-weight: 800;
+
+    opacity: 0;
+
+    transform: scale(0.7);
+
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
+}
+
+.stage-card.selected .stage-selected-check {
+    opacity: 1;
+
+    transform: scale(1);
+}
+
+.stage-card-body {
+    padding: 16px 17px 18px;
+}
+
+.stage-label {
+    display: inline-flex;
+
+    padding: 5px 9px;
+
+    margin-bottom: 8px;
+
+    border-radius: 999px;
+
+    background: var(--orange-soft);
+
+    color: var(--orange-dark);
+
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.stage-card h3 {
+    color: var(--navy);
+
+    font-size: 18px;
+    line-height: 1.25;
+
+    font-weight: 800;
+}
+
+.stage-card p {
+    margin-top: 7px;
+
+    color: var(--muted);
+
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+
+/* =====================================================
+   PHOTO
+===================================================== */
+
+.photo-upload-box {
+    max-width: 600px;
+
+    margin: 0 auto;
+
+    padding: 22px;
+
+    border: 1px dashed #b9c9d6;
+    border-radius: 24px;
+
+    background: var(--white);
+}
+
+.photo-upload-label {
+    min-height: 260px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 18px;
+
+    background: #f8fafc;
+
+    color: var(--navy);
+
+    text-align: center;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.photo-upload-label:hover {
+    background: var(--orange-soft);
+}
+
+.upload-icon {
+    width: 64px;
+    height: 64px;
+
+    display: grid;
+    place-items: center;
+
+    margin-bottom: 14px;
+
+    border-radius: 50%;
+
+    background: var(--orange-soft);
+
+    color: var(--orange);
+
+    font-size: 25px;
+    font-weight: 800;
+}
+
+.photo-upload-label strong {
+    font-size: 18px;
+}
+
+.photo-upload-label small {
+    margin-top: 7px;
+
+    color: var(--muted);
+
+    font-size: 12px;
+}
+
+.photo-preview-wrap {
+    text-align: center;
+}
+
+.photo-preview {
+    width: 100%;
+    max-height: 450px;
+
+    margin: 0 auto;
+
+    object-fit: contain;
+
+    border-radius: 18px;
+}
+
+.change-photo-btn {
+    margin-top: 12px;
+
+    border: 0;
+
+    background: transparent;
+
+    color: var(--orange-dark);
+
+    font-size: 13px;
+    font-weight: 800;
+}
+
+
+/* =====================================================
+   ACTIONS
+===================================================== */
+
+.step-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 14px;
+
+    margin-top: 26px;
+}
+
+.back-btn {
+    min-height: 48px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    padding: 10px 15px;
+
+    border: 1px solid var(--line);
+    border-radius: 12px;
+
+    background: var(--white);
+
+    color: var(--navy);
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.back-btn:hover {
+    border-color: var(--navy);
+}
+
+.primary-test-btn {
+    min-height: 52px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 12px 22px;
+
+    border: 1px solid var(--orange);
+    border-radius: 13px;
+
+    background: var(--orange);
+
+    color: var(--white);
+
+    font-size: 14px;
+    font-weight: 800;
+
+    box-shadow:
+        0 10px 24px rgba(255, 107, 26, 0.18);
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+.primary-test-btn:hover {
+    transform: translateY(-2px);
+
+    background: var(--orange-dark);
+}
+
+.full-width {
+    width: 100%;
+}
+
+
+/* =====================================================
+   QUESTIONS
+===================================================== */
+
+.question-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 16px;
+}
+
+.question-counter,
+.question-type {
+    color: var(--muted);
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 0.08em;
+}
+
+.question-type {
+    color: var(--orange-dark);
+}
+
+.question-card {
+    padding: clamp(22px, 5vw, 42px);
+
+    border: 1px solid var(--line);
+    border-radius: 26px;
+
+    background: var(--white);
+
+    box-shadow: var(--shadow-md);
+}
+
+.question-card h2 {
+    max-width: 800px;
+
+    color: var(--navy);
+
+    font-family: "Manrope", sans-serif;
+
+    font-size: clamp(25px, 4vw, 39px);
+
+    line-height: 1.16;
+
+    letter-spacing: -0.025em;
+}
+
+.answer-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 12px;
+
+    margin-top: 28px;
+}
+
+.answer-btn {
+    min-height: 72px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 15px 17px;
+
+    border: 1px solid var(--line);
+    border-radius: 15px;
+
+    background: #fbfcfd;
+
+    color: var(--navy);
+
+    text-align: left;
+
+    font-size: 14px;
+    line-height: 1.4;
+    font-weight: 600;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.answer-btn:hover {
+    border-color: var(--orange);
+
+    background: var(--orange-soft);
+
+    transform: translateY(-1px);
+}
+
+.answer-btn.selected {
+    border-color: var(--orange);
+
+    background: var(--orange-soft);
+
+    box-shadow:
+        0 8px 20px rgba(255, 107, 26, 0.10);
+}
+
+.question-actions {
+    justify-content: flex-start;
+}
+
+
+/* =====================================================
+   LEAD FORM
+===================================================== */
+
+.lead-heading {
+    max-width: 800px;
+
+    margin-bottom: 30px;
+}
+
+.lead-form {
+    padding: clamp(22px, 5vw, 42px);
+
+    border: 1px solid var(--line);
+    border-radius: 26px;
+
+    background: var(--white);
+
+    box-shadow: var(--shadow-md);
+}
+
+.form-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 20px;
+}
+
+.form-group {
+    min-width: 0;
+}
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: var(--navy);
+
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.required {
+    color: var(--orange);
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    height: 54px;
+
+    padding: 0 15px;
+
+    border: 1px solid #cbd7e1;
+    border-radius: 12px;
+
+    outline: none;
+
+    background: var(--white);
+
+    color: var(--text);
+
+    font-size: 15px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: var(--orange);
+
+    box-shadow:
+        0 0 0 4px rgba(255, 107, 26, 0.08);
+}
+
+.phone-field {
+    display: flex;
+
+    overflow: hidden;
+
+    border: 1px solid #cbd7e1;
+    border-radius: 12px;
+
+    background: var(--white);
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.phone-field:focus-within {
+    border-color: var(--orange);
+
+    box-shadow:
+        0 0 0 4px rgba(255, 107, 26, 0.08);
+}
+
+.phone-prefix {
+    min-width: 54px;
+
+    display: grid;
+    place-items: center;
+
+    border-right: 1px solid #e1e8ee;
+
+    background: #f7f9fb;
+
+    color: var(--navy);
+
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.phone-field input {
+    height: 52px;
+
+    border: 0 !important;
+
+    box-shadow: none !important;
+
+    border-radius: 0;
+
+    outline: none;
+}
+
+.field-message {
+    display: block;
+
+    min-height: 18px;
+
+    margin-top: 5px;
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.field-message.valid {
+    color: var(--success);
+}
+
+.field-message.invalid {
+    color: var(--danger);
+}
+
+.phone-field.valid {
+    border-color: var(--success);
+}
+
+.phone-field.invalid {
+    border-color: var(--danger);
+}
+
+.consent-row {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 10px;
+
+    margin-top: 22px;
+
+    color: var(--muted);
+
+    font-size: 12px;
+    line-height: 1.5;
+
+    cursor: pointer;
+}
+
+.consent-row input {
+    width: 17px;
+    height: 17px;
+
+    margin-top: 1px;
+
+    accent-color: var(--orange);
+}
+
+.form-error {
+    min-height: 20px;
+
+    margin-top: 12px;
+
+    color: var(--danger);
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   RESULT
+===================================================== */
+
+.result-card {
+    max-width: 940px;
+
+    margin: 0 auto;
+
+    padding: clamp(20px, 5vw, 42px);
+
+    border: 1px solid var(--line);
+    border-radius: 28px;
+
+    background: var(--white);
+
+    box-shadow: var(--shadow-lg);
+}
+
+.result-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+.result-eyebrow {
+    color: var(--orange-dark);
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 0.08em;
+}
+
+.result-top h2 {
+    margin-top: 7px;
+
+    color: var(--navy);
+
+    font-family: "Manrope", sans-serif;
+
+    font-size: clamp(30px, 4vw, 48px);
+
+    line-height: 1.05;
+
+    letter-spacing: -0.04em;
+}
+
+.result-type {
+    margin-top: 8px;
+
+    color: var(--muted);
+
+    font-size: 14px;
+}
+
+.result-brand {
+    padding: 9px 12px;
+
+    border: 1px solid var(--line);
+    border-radius: 999px;
+
+    color: var(--navy);
+
+    font-size: 11px;
+    font-weight: 800;
+
+    white-space: nowrap;
+}
+
+.result-stage-visual {
+    position: relative;
+
+    margin-top: 26px;
+
+    overflow: hidden;
+
+    border-radius: 22px;
+
+    background: #f1f4f6;
+}
+
+.result-stage-visual img {
+    width: 100%;
+    max-height: 500px;
+
+    object-fit: contain;
+
+    margin: 0 auto;
+}
+
+.result-stage-badge {
+    position: absolute;
+
+    left: 18px;
+    bottom: 18px;
+
+    padding: 8px 13px;
+
+    border-radius: 999px;
+
+    background: var(--orange);
+
+    color: var(--white);
+
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.result-content {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 16px;
+
+    margin-top: 24px;
+}
+
+.result-block {
+    padding: 22px;
+
+    border: 1px solid var(--line);
+    border-radius: 18px;
+
+    background: #fbfcfd;
+}
+
+.result-block h3 {
+    color: var(--navy);
+
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.result-block p {
+    margin-top: 9px;
+
+    color: var(--muted);
+
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.recommendation-block {
+    grid-column: 1 / -1;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff7f1,
+            #ffffff
+        );
+
+    border-color: #ffd9c5;
+}
+
+
+/* =====================================================
+   RECENT RESULT
+===================================================== */
+
+.recent-result {
+    margin-top: 24px;
+}
+
+.early-result-banner {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 15px;
+
+    padding: 22px;
+
+    border: 1px solid #d9eadd;
+    border-radius: 20px;
+
+    background: #f5fbf7;
+}
+
+.early-result-icon {
+    width: 40px;
+    height: 40px;
+
+    display: grid;
+    place-items: center;
+
+    flex: 0 0 auto;
+
+    border-radius: 50%;
+
+    background: var(--success);
+
+    color: var(--white);
+
+    font-weight: 800;
+}
+
+.early-result-banner strong {
+    color: var(--navy);
+
+    font-size: 18px;
+}
+
+.early-result-banner p {
+    margin-top: 7px;
+
+    color: #526c5c;
+
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.factor-list {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-top: 12px;
+}
+
+.factor-chip {
+    display: inline-flex;
+
+    padding: 8px 11px;
+
+    border-radius: 999px;
+
+    background: var(--orange-soft);
+
+    color: var(--orange-dark);
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   PLAN CARD
+===================================================== */
+
+.plan-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+
+    gap: 16px;
+
+    margin-top: 18px;
+
+    padding: 24px;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--navy),
+            #173f62
+        );
+
+    color: var(--white);
+
+    box-shadow:
+        0 18px 42px rgba(9, 44, 76, 0.18);
+}
+
+.plan-card-icon {
+    width: 50px;
+    height: 50px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 15px;
+
+    background: rgba(255, 255, 255, 0.12);
+
+    color: var(--white);
+
+    font-size: 22px;
+}
+
+.plan-label {
+    color: #ffd6c2;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 0.05em;
+}
+
+.plan-card h3 {
+    margin-top: 7px;
+
+    font-size: 21px;
+    font-weight: 800;
+}
+
+.plan-card p {
+    margin-top: 7px;
+
+    color: rgba(255, 255, 255, 0.75);
+
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.plan-download-btn {
+    min-height: 46px;
+
+    margin-top: 16px;
+
+    padding: 10px 15px;
+
+    border: 0;
+    border-radius: 11px;
+
+    background: var(--orange);
+
+    color: var(--white);
+
+    font-size: 12px;
+    font-weight: 800;
+}
+
+
+/* =====================================================
+   CONSULTATION
+===================================================== */
+
+.consultation-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+
+    gap: 16px;
+
+    margin-top: 18px;
+
+    padding: 24px;
+
+    border: 1px solid #ffd8c4;
+    border-radius: 22px;
+
+    background: #fff9f5;
+}
+
+.doctor-icon {
+    width: 52px;
+    height: 52px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+
+    background: var(--orange-soft);
+
+    color: var(--orange);
+
+    font-size: 23px;
+}
+
+.consultation-eyebrow {
+    color: var(--orange-dark);
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 0.04em;
+}
+
+.consultation-card h3 {
+    margin-top: 7px;
+
+    color: var(--navy);
+
+    font-size: 21px;
+}
+
+.consultation-card p {
+    margin-top: 7px;
+
+    color: var(--muted);
+
+    font-size: 13px;
+    line-height: 1.65;
+}
+
+.consultation-btn {
+    min-height: 48px;
+
+    margin-top: 15px;
+
+    padding: 11px 17px;
+
+    border: 0;
+    border-radius: 11px;
+
+    background: var(--orange);
+
+    color: var(--white);
+
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.result-disclaimer {
+    margin-top: 22px;
+
+    padding-top: 18px;
+
+    border-top: 1px solid var(--line);
+
+    color: #7a8794;
+
+    font-size: 11px;
+    line-height: 1.6;
+
+    text-align: center;
+}
+
+.restart-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+
+    margin: 18px auto 0;
+
+    border: 0;
+
+    background: transparent;
+
+    color: var(--navy);
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+.toast {
+    position: fixed;
+
+    left: 50%;
+    bottom: 22px;
+
+    z-index: 999;
+
+    transform:
+        translate(-50%, 20px);
+
+    width: min(
+        calc(100% - 32px),
+        430px
+    );
+
+    padding: 13px 16px;
+
+    border-radius: 12px;
+
+    background: var(--navy);
+
+    color: var(--white);
+
+    font-size: 12px;
+    line-height: 1.4;
+
+    text-align: center;
+
+    opacity: 0;
+    pointer-events: none;
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease;
+}
+
+.toast.show {
+    opacity: 1;
+
+    transform:
+        translate(-50%, 0);
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 980px) {
+
+    .hero-shell {
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+
+        min-height: auto;
+    }
+
+    .hero-copy {
+        padding: 42px 0 10px;
+    }
+
+    .hero-title {
+        max-width: 720px;
+    }
+
+    .hero-description {
+        max-width: 680px;
+    }
+
+    .hero-visual {
+        min-height: 520px;
+    }
+
+    .hero-visual::before {
+        right: -220px;
+    }
+
+    .hero-video-card {
+        width: min(100%, 600px);
+    }
+
+    .stage-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .result-content {
+        grid-template-columns: 1fr;
+    }
+
+    .recommendation-block {
+        grid-column: auto;
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE — PRIMARY PRIORITY
+===================================================== */
+
+@media (max-width: 640px) {
+
+    body {
+        font-size: 14px;
+    }
+
+
+    /* HEADER */
+
+    .header-inner {
+        width: min(100% - 22px, var(--container));
+
+        min-height: 62px;
+    }
+
+    .brand-logo {
+        height: 39px;
+    }
+
+    .language-btn {
+        min-width: 37px;
+        height: 28px;
+
+        font-size: 10px;
+    }
+
+
+    /* HERO */
+
+    .hero-section {
+        padding:
+            8px 10px 0;
+    }
+
+    .hero-shell {
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+
+        gap: 12px;
+    }
+
+    .hero-copy {
+        padding:
+            24px 8px 0;
+    }
+
+    .hero-brand-line {
+        margin-bottom: 12px;
+
+        font-size: 10px;
+    }
+
+    .hero-brand-line::before {
+        width: 20px;
+
+        margin-right: 7px;
+    }
+
+    .hero-title {
+        font-size: clamp(37px, 11vw, 54px);
+
+        line-height: 0.99;
+
+        letter-spacing: -0.06em;
+    }
+
+    .hero-description {
+        margin-top: 17px;
+
+        font-size: 14px;
+
+        line-height: 1.55;
+    }
+
+    .hero-actions {
+        width: 100%;
+
+        gap: 9px;
+
+        margin-top: 20px;
+    }
+
+    .hero-primary-btn,
+    .hero-secondary-btn {
+        width: 100%;
+
+        min-height: 55px;
+
+        border-radius: 13px;
+
+        font-size: 13px;
+    }
+
+    .hero-benefits {
+        display: grid;
+
+        grid-template-columns: repeat(3, 1fr);
+
+        gap: 7px;
+
+        margin-top: 18px;
+    }
+
+    .benefit-item {
+        min-width: 0;
+
+        flex-direction: column;
+
+        gap: 6px;
+
+        text-align: center;
+    }
+
+    .benefit-icon {
+        width: 32px;
+        height: 32px;
+
+        font-size: 15px;
+    }
+
+    .benefit-item strong,
+    .benefit-item small {
+        display: block;
+
+        font-size: 10px;
+
+        line-height: 1.25;
+    }
+
+    .benefit-item small {
+        margin-top: 2px;
+    }
+
+
+    /* MOBILE VIDEO */
+
+    .hero-visual {
+        width: 100%;
+
+        min-height: 0;
+
+        padding:
+            0 8px 14px;
+    }
+
+    .hero-visual::before {
+        width: 95%;
+
+        height: 95%;
+
+        right: -34%;
+
+        top: 3%;
+
+        border-radius: 40% 0 0 40%;
+
+        transform: rotate(4deg);
+    }
+
+    .hero-video-card {
+        width: 100%;
+
+        aspect-ratio: 0.92 / 1;
+
+        border-radius: 25px;
+    }
+
+    .video-badge {
+        top: 12px;
+        right: 12px;
+
+        padding: 9px 10px;
+
+        border-radius: 12px;
+
+        font-size: 10px;
+    }
+
+    .video-badge small {
+        font-size: 8px;
+    }
+
+    .video-badge-icon {
+        font-size: 16px;
+    }
+
+    .video-play-indicator {
+        width: 54px;
+        height: 54px;
+    }
+
+    .video-feature-stack {
+        right: 3px;
+
+        top: auto;
+        bottom: 32px;
+
+        transform: none;
+
+        gap: 6px;
+    }
+
+    .video-feature-card {
+        width: 108px;
+        min-height: 48px;
+
+        gap: 6px;
+
+        padding: 7px;
+
+        border-radius: 11px;
+
+        font-size: 8px;
+    }
+
+    .video-feature-card span {
+        width: 24px;
+        height: 24px;
+
+        font-size: 11px;
+    }
+
+
+    /* STATS */
+
+    .hero-stats {
+        width: calc(100% - 16px);
+
+        margin:
+            -3px auto 0;
+
+        grid-template-columns: repeat(3, 1fr);
+
+        border-radius: 17px;
+    }
+
+    .hero-stat {
+        min-height: 75px;
+
+        gap: 5px;
+
+        padding: 8px 5px;
+    }
+
+    .stat-icon {
+        width: 29px;
+        height: 29px;
+
+        font-size: 13px;
+    }
+
+    .hero-stat strong {
+        font-size: 18px;
+    }
+
+    .hero-stat small {
+        font-size: 8px;
+
+        white-space: nowrap;
+    }
+
+
+    /* TEST SECTION */
+
+    .hair-test-section {
+        padding:
+            55px 12px;
+    }
+
+    .progress-wrapper {
+        margin-bottom: 30px;
+    }
+
+    .progress-top {
+        font-size: 9px;
+    }
+
+    .step-pill {
+        padding: 6px 10px;
+
+        margin-bottom: 11px;
+
+        font-size: 9px;
+    }
+
+    .step-heading h2,
+    .lead-heading h2 {
+        font-size: 31px;
+
+        line-height: 1.06;
+    }
+
+    .step-heading p,
+    .lead-heading p {
+        font-size: 13px;
+
+        line-height: 1.55;
+    }
+
+
+    /* GENDER */
+
+    .gender-grid {
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+    }
+
+    .gender-card-image {
+        min-height: 170px;
+
+        font-size: 70px;
+    }
+
+    .gender-card-content {
+        padding: 17px 18px 21px;
+    }
+
+    .gender-card-content h3 {
+        font-size: 20px;
+    }
+
+
+    /* DURATION */
+
+    .duration-grid {
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+    }
+
+    .duration-card {
+        min-height: 125px;
+
+        grid-template-columns: auto 1fr auto;
+
+        gap: 13px;
+
+        padding: 18px;
+
+        border-radius: 18px;
+    }
+
+    .duration-number {
+        width: 43px;
+        height: 43px;
+
+        font-size: 11px;
+    }
+
+    .duration-card h3 {
+        font-size: 17px;
+    }
+
+    .duration-card p {
+        font-size: 12px;
+    }
+
+
+    /* STAGES */
+
+    .stage-heading-row {
+        display: block;
+
+        margin-bottom: 20px;
+    }
+
+    .not-sure-box {
+        width: 100%;
+
+        margin-top: 17px;
+    }
+
+    .stage-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        gap: 9px;
+    }
+
+    .stage-card {
+        border-radius: 14px;
+    }
+
+    .stage-image-wrap {
+        aspect-ratio: 1.15 / 1;
+    }
+
+    .stage-card-body {
+        padding: 10px;
+    }
+
+    .stage-label {
+        padding: 4px 7px;
+
+        margin-bottom: 6px;
+
+        font-size: 8px;
+    }
+
+    .stage-card h3 {
+        font-size: 13px;
+    }
+
+    .stage-card p {
+        margin-top: 5px;
+
+        font-size: 10px;
+
+        line-height: 1.35;
+    }
+
+    .stage-selected-check {
+        width: 27px;
+        height: 27px;
+
+        top: 7px;
+        right: 7px;
+
+        font-size: 11px;
+    }
+
+
+    /* PHOTO */
+
+    .photo-upload-box {
+        padding: 12px;
+
+        border-radius: 19px;
+    }
+
+    .photo-upload-label {
+        min-height: 210px;
+
+        border-radius: 14px;
+    }
+
+    .upload-icon {
+        width: 54px;
+        height: 54px;
+
+        font-size: 20px;
+    }
+
+
+    /* QUESTIONS */
+
+    .question-header {
+        margin-bottom: 11px;
+    }
+
+    .question-counter,
+    .question-type {
+        font-size: 8px;
+    }
+
+    .question-card {
+        padding: 19px 15px;
+
+        border-radius: 19px;
+    }
+
+    .question-card h2 {
+        font-size: 24px;
+
+        line-height: 1.15;
+    }
+
+    .answer-grid {
+        grid-template-columns: 1fr;
+
+        gap: 8px;
+
+        margin-top: 20px;
+    }
+
+    .answer-btn {
+        min-height: 60px;
+
+        padding: 12px 13px;
+
+        border-radius: 12px;
+
+        font-size: 12px;
+    }
+
+
+    /* FORM */
+
+    .lead-form {
+        padding: 17px;
+
+        border-radius: 19px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+
+        gap: 15px;
+    }
+
+    .form-group input,
+    .form-group select {
+        height: 51px;
+
+        font-size: 14px;
+    }
+
+    .consent-row {
+        font-size: 11px;
+    }
+
+    .primary-test-btn {
+        min-height: 51px;
+
+        font-size: 12px;
+    }
+
+
+    /* RESULT */
+
+    .result-card {
+        padding: 17px;
+
+        border-radius: 21px;
+    }
+
+    .result-top {
+        display: block;
+    }
+
+    .result-top h2 {
+        font-size: 30px;
+    }
+
+    .result-brand {
+        display: inline-flex;
+
+        margin-top: 11px;
+
+        font-size: 9px;
+    }
+
+    .result-stage-visual {
+        margin-top: 17px;
+
+        border-radius: 16px;
+    }
+
+    .result-stage-badge {
+        left: 10px;
+        bottom: 10px;
+
+        padding: 6px 9px;
+
+        font-size: 9px;
+    }
+
+    .result-content {
+        gap: 9px;
+
+        margin-top: 14px;
+    }
+
+    .result-block {
+        padding: 16px;
+
+        border-radius: 14px;
+    }
+
+    .result-block h3 {
+        font-size: 13px;
+    }
+
+    .result-block p {
+        font-size: 12px;
+
+        line-height: 1.6;
+    }
+
+    .early-result-banner {
+        padding: 15px;
+
+        gap: 10px;
+
+        border-radius: 15px;
+    }
+
+    .early-result-icon {
+        width: 32px;
+        height: 32px;
+    }
+
+    .early-result-banner strong {
+        font-size: 14px;
+    }
+
+    .early-result-banner p {
+        font-size: 11px;
+    }
+
+    .plan-card,
+    .consultation-card {
+        padding: 16px;
+
+        gap: 11px;
+
+        border-radius: 16px;
+    }
+
+    .plan-card-icon,
+    .doctor-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .plan-card h3,
+    .consultation-card h3 {
+        font-size: 16px;
+    }
+
+    .plan-card p,
+    .consultation-card p {
+        font-size: 11px;
+    }
+
+    .plan-download-btn,
+    .consultation-btn {
+        width: 100%;
+
+        min-height: 44px;
+
+        font-size: 10px;
+    }
+
+}
+
+
+/* =====================================================
+   VERY SMALL DEVICES
+===================================================== */
+
+@media (max-width: 380px) {
+
+    .hero-title {
+        font-size: 35px;
+    }
+
+    .hero-description {
+        font-size: 13px;
+    }
+
+    .video-feature-card {
+        width: 96px;
+
+        font-size: 7px;
+    }
+
+    .video-feature-card span {
+        width: 21px;
+        height: 21px;
+    }
+
+    .stage-card h3 {
+        font-size: 12px;
+    }
+
+    .stage-card p {
+        font-size: 9px;
+    }
+
+}
+/* =========================================================
+   CLINICA MEDICARE®
+   2-MINUTE HAIR ASSESSMENT
+   MODAL + MOBILE FINAL PATCH
+   ========================================================= */
+
+
+/* =========================================================
+   1. BODY MODAL LOCK
+========================================================= */
+
+body.modal-open {
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   2. ADMIN PORTAL BUTTON
+========================================================= */
+
+.admin-portal-btn {
+
+    min-height: 38px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    padding: 8px 13px;
+
+    border: 1px solid var(--line);
+    border-radius: 999px;
+
+    background: var(--white);
+    color: var(--navy);
+
+    font-size: 11px;
+    font-weight: 800;
+
+    white-space: nowrap;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.admin-portal-btn:hover {
+
+    background: var(--navy);
+    border-color: var(--navy);
+    color: var(--white);
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 8px 20px rgba(9, 44, 76, 0.12);
+}
+
+
+.admin-portal-icon {
+
+    width: 18px;
+    height: 18px;
+
+    display: inline-grid;
+    place-items: center;
+
+    border-radius: 5px;
+
+    background: var(--orange-soft);
+    color: var(--orange);
+
+    font-size: 10px;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+
+.admin-portal-btn:hover .admin-portal-icon {
+
+    background: rgba(255,255,255,0.14);
+    color: var(--white);
+}
+
+
+/* =========================================================
+   3. HAIR TEST MODAL OVERLAY
+========================================================= */
+
+.hair-test-modal {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 9999;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 22px;
+
+    background:
+        rgba(6, 31, 56, 0.68);
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    opacity: 0;
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.25s ease,
+        visibility 0.25s ease;
+}
+
+
+.hair-test-modal.active {
+
+    opacity: 1;
+    visibility: visible;
+
+    pointer-events: auto;
+}
+
+
+/* =========================================================
+   4. MODAL DIALOG
+========================================================= */
+
+.hair-test-modal-dialog {
+
+    position: relative;
+
+    width: min(1080px, 100%);
+
+    max-height: calc(100vh - 44px);
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+
+    border:
+        1px solid rgba(9, 44, 76, 0.10);
+
+    border-radius: 26px;
+
+    background: var(--white);
+
+    box-shadow:
+        0 30px 90px rgba(0, 0, 0, 0.22);
+
+    opacity: 0;
+
+    transform:
+        translateY(20px)
+        scale(0.975);
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+.hair-test-modal.active
+.hair-test-modal-dialog {
+
+    opacity: 1;
+
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+
+/* =========================================================
+   5. MODAL HEADER
+========================================================= */
+
+.hair-test-modal-header {
+
+    position: relative;
+
+    z-index: 5;
+
+    min-height: 72px;
+
+    flex: 0 0 auto;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 16px;
+
+    padding:
+        14px 22px;
+
+    border-bottom:
+        1px solid var(--line);
+
+    background:
+        rgba(255,255,255,0.98);
+}
+
+
+.hair-test-modal-brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    min-width: 0;
+}
+
+
+.hair-test-modal-brand-mark {
+
+    width: 38px;
+    height: 38px;
+
+    flex: 0 0 38px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 11px;
+
+    background: var(--navy);
+
+    color: var(--white);
+
+    font-family: "Manrope", sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.04em;
+
+    box-shadow:
+        0 6px 15px rgba(9,44,76,0.12);
+}
+
+
+.hair-test-modal-brand > div {
+
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 2px;
+}
+
+
+.hair-test-modal-brand strong {
+
+    color: var(--navy);
+
+    font-family: "Manrope", sans-serif;
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+    line-height: 1.2;
+}
+
+
+.hair-test-modal-brand small {
+
+    color: var(--muted);
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    line-height: 1.2;
+}
+
+
+/* =========================================================
+   6. MODAL CLOSE BUTTON
+========================================================= */
+
+.hair-test-modal-close {
+
+    width: 40px;
+    height: 40px;
+
+    flex: 0 0 40px;
+
+    display: grid;
+    place-items: center;
+
+    border:
+        1px solid var(--line);
+
+    border-radius: 50%;
+
+    background: var(--white);
+
+    color: var(--navy);
+
+    font-size: 25px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.hair-test-modal-close:hover {
+
+    border-color: var(--orange);
+
+    background: var(--orange-soft);
+
+    color: var(--orange);
+
+    transform: rotate(4deg);
+}
+
+
+.hair-test-modal-close:active {
+
+    transform: scale(0.94);
+}
+
+
+/* =========================================================
+   7. MODAL BODY
+========================================================= */
+
+.hair-test-modal-body {
+
+    min-height: 0;
+
+    flex: 1 1 auto;
+
+    overflow-y: auto;
+
+    overflow-x: hidden;
+
+    overscroll-behavior: contain;
+
+    -webkit-overflow-scrolling: touch;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff 0%,
+            #f7f9fb 100%
+        );
+}
+
+
+.hair-test-modal-body::-webkit-scrollbar {
+
+    width: 7px;
+}
+
+
+.hair-test-modal-body::-webkit-scrollbar-track {
+
+    background: #f2f5f7;
+}
+
+
+.hair-test-modal-body::-webkit-scrollbar-thumb {
+
+    background: #c5d0d9;
+
+    border-radius: 999px;
+}
+
+
+.hair-test-modal-body::-webkit-scrollbar-thumb:hover {
+
+    background: #aebdc9;
+}
+
+
+/* =========================================================
+   8. TEST SECTION INSIDE MODAL
+========================================================= */
+
+.hair-test-modal-body
+.hair-test-section {
+
+    min-height: 100%;
+
+    padding-top: 34px;
+    padding-bottom: 46px;
+}
+
+
+/*
+   The assessment is now inside the modal,
+   so the old standalone section spacing is reduced.
+*/
+
+.hair-test-modal-body
+.test-container {
+
+    width: min(
+        100%,
+        980px
+    );
+
+    margin: 0 auto;
+
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+
+/* =========================================================
+   9. PROGRESS BAR
+========================================================= */
+
+.hair-test-modal-body
+.progress-wrapper {
+
+    max-width: 760px;
+
+    margin:
+        0 auto 30px;
+}
+
+
+.hair-test-modal-body
+.progress-track {
+
+    height: 5px;
+}
+
+
+.hair-test-modal-body
+.progress-bar {
+
+    min-width: 0;
+
+    transition:
+        width 0.35s ease;
+}
+
+
+/* =========================================================
+   10. TEST STEP TRANSITION
+========================================================= */
+
+.hair-test-modal-body
+.test-step {
+
+    animation:
+        modalStepIn 0.25s ease both;
+}
+
+
+@keyframes modalStepIn {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(8px);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+/* =========================================================
+   11. GENDER CARD
+========================================================= */
+
+.hair-test-modal-body
+.gender-card {
+
+    cursor: pointer;
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+.hair-test-modal-body
+.gender-card:active {
+
+    transform: scale(0.99);
+}
+
+
+/* =========================================================
+   12. DURATION CARD
+========================================================= */
+
+.hair-test-modal-body
+.duration-card {
+
+    cursor: pointer;
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+.hair-test-modal-body
+.duration-card:active {
+
+    transform: scale(0.99);
+}
+
+
+/* =========================================================
+   13. STAGE GRID
+========================================================= */
+
+.hair-test-modal-body
+.stage-grid {
+
+    margin-bottom: 18px;
+}
+
+
+/* Stage cards generated dynamically by JS */
+
+.hair-test-modal-body
+.stage-card {
+
+    cursor: pointer;
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+/* =========================================================
+   14. STAGE IMAGE
+========================================================= */
+
+.hair-test-modal-body
+.stage-image {
+
+    background: #f2f4f6;
+}
+
+
+/* =========================================================
+   15. ANSWER CARDS
+========================================================= */
+
+
+/*
+   Existing JS may generate .answer-btn
+   or .choice-card.
+
+   Both are supported.
+*/
+
+
+.hair-test-modal-body
+.choice-card {
+
+    min-height: 64px;
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 13px 15px;
+
+    border:
+        1px solid var(--line);
+
+    border-radius: 14px;
+
+    background: var(--white);
+
+    color: var(--navy);
+
+    text-align: left;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    line-height: 1.45;
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.hair-test-modal-body
+.choice-card:hover {
+
+    border-color: var(--orange);
+
+    background: var(--orange-soft);
+
+    transform: translateY(-1px);
+}
+
+
+.hair-test-modal-body
+.choice-card.selected {
+
+    border-color: var(--orange);
+
+    background: var(--orange-soft);
+
+    box-shadow:
+        0 8px 20px rgba(255,107,26,0.10);
+}
+
+
+.hair-test-modal-body
+.choice-index {
+
+    width: 30px;
+    height: 30px;
+
+    flex: 0 0 30px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #f2f6f9;
+
+    color: var(--navy);
+
+    font-size: 11px;
+
+    font-weight: 800;
+}
+
+
+.hair-test-modal-body
+.choice-card.selected
+.choice-index {
+
+    background: var(--orange);
+
+    color: var(--white);
+}
+
+
+.hair-test-modal-body
+.choice-text {
+
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+/* =========================================================
+   16. QUESTION ANSWER ALIAS
+========================================================= */
+
+.hair-test-modal-body
+.answer-btn {
+
+    cursor: pointer;
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+.hair-test-modal-body
+.answer-btn:active {
+
+    transform: scale(0.99);
+}
+
+
+/* =========================================================
+   17. PHOTO OPTIONAL STATE
+========================================================= */
+
+.hair-test-modal-body
+.photo-upload-box {
+
+    position: relative;
+}
+
+
+.hair-test-modal-body
+.photo-preview-wrap[hidden] {
+
+    display: none !important;
+}
+
+
+.hair-test-modal-body
+.photo-preview {
+
+    display: block;
+
+    max-width: 100%;
+
+    width: auto;
+
+    max-height: 420px;
+
+    margin: 0 auto;
+
+    object-fit: contain;
+}
+
+
+/*
+   Important:
+   Photo is optional.
+   Continue button remains usable
+   even when no photo is selected.
+*/
+
+.hair-test-modal-body
+#photoContinue {
+
+    min-width: 150px;
+}
+
+
+/* =========================================================
+   18. FORM BUTTON LOADING
+========================================================= */
+
+.hair-test-modal-body
+#submitLeadBtn.loading {
+
+    position: relative;
+
+    pointer-events: none;
+
+    opacity: 0.75;
+}
+
+
+.hair-test-modal-body
+#submitLeadBtn.loading::after {
+
+    content: "";
+
+    width: 16px;
+    height: 16px;
+
+    margin-left: 9px;
+
+    display: inline-block;
+
+    vertical-align: middle;
+
+    border:
+        2px solid rgba(255,255,255,0.45);
+
+    border-top-color:
+        var(--white);
+
+    border-radius: 50%;
+
+    animation:
+        clinicaSpin 0.7s linear infinite;
+}
+
+
+@keyframes clinicaSpin {
+
+    to {
+
+        transform: rotate(360deg);
+    }
+}
+
+
+/* =========================================================
+   19. RESULT CTA IMPROVEMENT
+========================================================= */
+
+.hair-test-modal-body
+.consultation-card {
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+.hair-test-modal-body
+.consultation-btn {
+
+    min-height: 50px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 22px rgba(255,107,26,0.16);
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.hair-test-modal-body
+.consultation-btn:hover {
+
+    background: var(--orange-dark);
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 28px rgba(255,107,26,0.22);
+}
+
+
+/* =========================================================
+   20. PLAN DOWNLOAD CTA
+========================================================= */
+
+.hair-test-modal-body
+.plan-download-btn {
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.hair-test-modal-body
+.plan-download-btn:hover {
+
+    background: var(--orange-dark);
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   21. RESULT IMAGE — MOBILE SAFE
+========================================================= */
+
+.hair-test-modal-body
+.result-stage-visual {
+
+    min-height: 160px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+.hair-test-modal-body
+.result-stage-visual img {
+
+    max-width: 100%;
+
+    width: 100%;
+
+    height: auto;
+
+    max-height: 470px;
+
+    object-fit: contain;
+}
+
+
+/* =========================================================
+   22. MODAL BACKDROP CLICK
+========================================================= */
+
+.hair-test-modal-backdrop {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 0;
+
+    background: transparent;
+}
+
+
+.hair-test-modal-dialog {
+
+    z-index: 1;
+}
+
+
+/* =========================================================
+   23. MOBILE — PRIMARY PRIORITY
+========================================================= */
+
+@media (max-width: 640px) {
+
+
+    /* -----------------------------------------
+       HEADER
+    ----------------------------------------- */
+
+    .header-actions {
+
+        gap: 7px;
+    }
+
+
+    .admin-portal-btn {
+
+        min-height: 32px;
+
+        padding:
+            6px 9px;
+
+        gap: 5px;
+
+        font-size: 9px;
+    }
+
+
+    .admin-portal-icon {
+
+        width: 16px;
+        height: 16px;
+
+        font-size: 8px;
+    }
+
+
+    /* -----------------------------------------
+       MODAL
+    ----------------------------------------- */
+
+    .hair-test-modal {
+
+        align-items: stretch;
+
+        justify-content: stretch;
+
+        padding: 0;
+
+        background:
+            rgba(6, 31, 56, 0.70);
+
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+
+
+    .hair-test-modal-dialog {
+
+        width: 100%;
+
+        height: 100dvh;
+
+        max-height: 100dvh;
+
+        border: 0;
+
+        border-radius: 0;
+
+        box-shadow: none;
+
+        transform:
+            translateY(18px);
+
+        padding:
+            env(safe-area-inset-top)
+            0
+            env(safe-area-inset-bottom);
+
+        background: var(--white);
+    }
+
+
+    .hair-test-modal.active
+    .hair-test-modal-dialog {
+
+        transform:
+            translateY(0);
+    }
+
+
+    /* -----------------------------------------
+       MODAL HEADER
+    ----------------------------------------- */
+
+    .hair-test-modal-header {
+
+        min-height: 60px;
+
+        padding:
+            9px 13px;
+
+        gap: 10px;
+
+        box-shadow:
+            0 2px 10px rgba(9,44,76,0.05);
+    }
+
+
+    .hair-test-modal-brand {
+
+        gap: 8px;
+    }
+
+
+    .hair-test-modal-brand-mark {
+
+        width: 33px;
+        height: 33px;
+
+        flex-basis: 33px;
+
+        border-radius: 9px;
+
+        font-size: 9px;
+    }
+
+
+    .hair-test-modal-brand strong {
+
+        font-size: 12px;
+    }
+
+
+    .hair-test-modal-brand small {
+
+        font-size: 9px;
+    }
+
+
+    .hair-test-modal-close {
+
+        width: 36px;
+        height: 36px;
+
+        flex-basis: 36px;
+
+        font-size: 23px;
+    }
+
+
+    /* -----------------------------------------
+       MODAL BODY
+    ----------------------------------------- */
+
+    .hair-test-modal-body {
+
+        height: calc(
+            100dvh -
+            60px -
+            env(safe-area-inset-top) -
+            env(safe-area-inset-bottom)
+        );
+
+        overflow-y: auto;
+
+        overscroll-behavior-y: contain;
+    }
+
+
+    .hair-test-modal-body
+    .hair-test-section {
+
+        padding:
+            22px 0 35px;
+    }
+
+
+    .hair-test-modal-body
+    .test-container {
+
+        width: 100%;
+
+        padding-left: 13px;
+        padding-right: 13px;
+    }
+
+
+    /* -----------------------------------------
+       PROGRESS
+    ----------------------------------------- */
+
+    .hair-test-modal-body
+    .progress-wrapper {
+
+        margin:
+            0 4px 23px;
+    }
+
+
+    .hair-test-modal-body
+    .progress-top {
+
+        font-size: 8px;
+    }
+
+
+    /* -----------------------------------------
+       STEP HEADING
+    ----------------------------------------- */
+
+    .hair-test-modal-body
+    .step-heading h2,
+    .hair-test-modal-body
+    .lead-heading h2 {
+
+        font-size: 28px;
+
+        line-height: 1.08;
+
+        letter-spacing: -0.035em;
+    }
+
+
+    .hair-test-modal-body
+    .step-heading p,
+    .hair-test-modal-body
+    .lead-heading p {
+
+        font-size: 12px;
+
+        line-height: 1.55;
+    }
+
+
+    /* -----------------------------------------
+       GENDER
+    ----------------------------------------- */
+
+    .hair-test-modal-body
+    .gender-grid {
+
+        gap: 10px;
+    }
+
+
+    .hair-test-modal-body
+    .gender-card {
+
+        border-radius: 17px;
+    }
+
+
+    .hair-test-modal-body
+    .gender-card-image {
+
+        min-height: 150px;
+    }
+
+
+    .hair-test-modal-body
+    .gender-card-content {
+
+        padding:
+            14px 15px 18px;
+    }
+
+
+    .hair-test-modal-body
+    .gender-card-content h3 {
+
+        font-size: 18px;
+    }
+
+
+    .hair-test-modal-body
+    .gender-card-content p {
+
+        font-size: 11px;
+    }
+
+
+    /* -----------------------------------------
+       DURATION
+    ----------------------------------------- */
+
+    .hair-test-modal-body
+    .duration-grid {
+
+        gap: 10px;
+    }
+
+
+    .hair-test-modal-body
+    .duration-card {
+
+        min-height: 112px;
+
+        padding: 15px;
+
+        border-radius: 16px;
+
+        gap: 11px;
+    }
+
+
+    .hair-test-modal-body
+    .duration-number {
+
+        width: 40px;
+        height: 40px;
+    }
+
+
+    .hair-test-modal-body
+    .duration-card h3 {
+
+        font-size: 16px;
+    }
+
+
+    .hair-test-modal-body
+    .duration-card p {
+
+        font-size: 11px;
+    }
+
+
+    /* -----------------------------------------
+       STAGE
+    ----------------------------------------- */
+
+    .hair-test-modal-body
+    .stage-grid {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 8px;
+    }
+
+
+    .hair-test-modal-body
+    .stage-card {
+
+        min-width: 0;
+
+        border-radius: 13px;
+    }
+
+
+    .hair-test-modal-body
+    .stage-image-wrap {
+
+        aspect-ratio:
+            1.12 / 1;
+    }
+
+
+    .hair-test-modal-body
+    .stage-card-body {
+
+        padding:
+            9px 9px 11px;
+    }
+
+
+    .hair-test-modal-body
+    .stage-card h3 {
+
+        font-size: 12px;
+
+        line-height: 1.25;
+    }
+
+
+    .hair-test-modal-body
+    .stage-card p {
+
+        font-size: 9px;
+
+        line-height: 1.35;
+    }
+
+
+    /* -----------------------------------------
+       PHOTO
+    ----------------------------------------- */
+
+    .hair-test-modal-body
+    .photo-upload-box {
+
+        padding: 10px;
+
+        border-radius: 17px;
+    }
+
+
+    .hair-test-modal-body
+    .photo-upload-label {
+
+        min-height: 190px;
+
+        border-radius: 13px;
+    }
+
+
+    .hair-test-modal-body
+    .upload-icon {
+
+        width: 50px;
+        height: 50px;
+
+        margin-bottom: 11px;
+
+        font-size: 19px;
+    }
+
+
+    /* -----------------------------------------
+       QUESTIONS
+    ----------------------------------------- */
+
+    .hair-test-modal-body
+    .question-header {
+
+        margin-bottom: 9px;
+    }
+
+
+    .hair-test-modal-body
+    .question-counter,
+    .hair-test-modal-body
+    .question-type {
+
+        font-size: 8px;
+    }
+
+
+    .hair-test-modal-body
+    .question-card {
+
+        padding:
+            18px 13px;
+
+        border-radius: 17px;
+    }
+
+
+    .hair-test-modal-body
+    .question-card h2 {
+
+        font-size: 22px;
+
+        line-height: 1.18;
+    }
+
+
+    .hair-test-modal-body
+    .answer-grid {
+
+        grid-template-columns: 1fr;
+
+        gap: 8px;
+
+        margin-top: 17px;
+    }
+
+
+    .hair-test-modal-body
+    .choice-card {
+
+        min-height: 59px;
+
+        padding:
+            12px;
+
+        border-radius: 12px;
+
+        font-size: 11px;
+    }
+
+
+    .hair-test-modal-body
+    .choice-index {
+
+        width: 28px;
+        height: 28px;
+
+        flex-basis: 28px;
+    }
+
+
+    .hair-test-modal-body
+    .answer-btn {
+
+        min-height: 59px;
+
+        padding:
+            11px 12px;
+
+        border-radius: 12px;
+
+        font-size: 11px;
+    }
+
+
+    /* -----------------------------------------
+       FORM
+    ----------------------------------------- */
+
+    .hair-test-modal-body
+    .lead-form {
+
+        padding:
+            15px;
+
+        border-radius: 17px;
+    }
+
+
+    .hair-test-modal-body
+    .form-grid {
+
+        gap: 13px;
+    }
+
+
+    .hair-test-modal-body
+    .form-group input,
+    .hair-test-modal-body
+    .form-group select {
+
+        height: 50px;
+
+        font-size: 13px;
+    }
+
+
+    .hair-test-modal-body
+    .consent-row {
+
+        font-size: 10px;
+
+        line-height: 1.45;
+    }
+
+
+    .hair-test-modal-body
+    .primary-test-btn {
+
+        width: 100%;
+
+        min-height: 50px;
+
+        font-size: 12px;
+    }
+
+
+    /* -----------------------------------------
+       RESULT
+    ----------------------------------------- */
+
+    .hair-test-modal-body
+    .result-card {
+
+        padding: 14px;
+
+        border-radius: 18px;
+    }
+
+
+    .hair-test-modal-body
+    .result-top h2 {
+
+        font-size: 27px;
+    }
+
+
+    .hair-test-modal-body
+    .result-brand {
+
+        margin-top: 8px;
+    }
+
+
+    .hair-test-modal-body
+    .result-stage-visual {
+
+        min-height: 145px;
+
+        margin-top: 14px;
+
+        border-radius: 14px;
+    }
+
+
+    .hair-test-modal-body
+    .result-stage-visual img {
+
+        max-height: 320px;
+    }
+
+
+    .hair-test-modal-body
+    .result-content {
+
+        grid-template-columns: 1fr;
+
+        gap: 8px;
+
+        margin-top: 12px;
+    }
+
+
+    .hair-test-modal-body
+    .result-block {
+
+        padding: 14px;
+
+        border-radius: 13px;
+    }
+
+
+    .hair-test-modal-body
+    .result-block h3 {
+
+        font-size: 12px;
+    }
+
+
+    .hair-test-modal-body
+    .result-block p {
+
+        font-size: 11px;
+
+        line-height: 1.6;
+    }
+
+
+    /* -----------------------------------------
+       EARLY RESULT
+    ----------------------------------------- */
+
+    .hair-test-modal-body
+    .early-result-banner {
+
+        padding: 14px;
+
+        gap: 9px;
+
+        border-radius: 14px;
+    }
+
+
+    .hair-test-modal-body
+    .early-result-icon {
+
+        width: 31px;
+        height: 31px;
+    }
+
+
+    .hair-test-modal-body
+    .early-result-banner strong {
+
+        font-size: 13px;
+    }
+
+
+    .hair-test-modal-body
+    .early-result-banner p {
+
+        font-size: 10px;
+
+        line-height: 1.55;
+    }
+
+
+    /* -----------------------------------------
+       FACTORS
+    ----------------------------------------- */
+
+    .hair-test-modal-body
+    .factor-list {
+
+        gap: 6px;
+
+        margin-top: 9px;
+    }
+
+
+    .hair-test-modal-body
+    .factor-chip {
+
+        padding:
+            7px 9px;
+
+        font-size: 9px;
+    }
+
+
+    /* -----------------------------------------
+       PLAN
+    ----------------------------------------- */
+
+    .hair-test-modal-body
+    .plan-card {
+
+        grid-template-columns:
+            auto 1fr;
+
+        gap: 10px;
+
+        padding: 15px;
+
+        border-radius: 15px;
+    }
+
+
+    .hair-test-modal-body
+    .plan-card-icon {
+
+        width: 39px;
+        height: 39px;
+    }
+
+
+    .hair-test-modal-body
+    .plan-card h3 {
+
+        font-size: 15px;
+
+        line-height: 1.25;
+    }
+
+
+    .hair-test-modal-body
+    .plan-card p {
+
+        font-size: 10px;
+
+        line-height: 1.5;
+    }
+
+
+    .hair-test-modal-body
+    .plan-download-btn {
+
+        width: 100%;
+
+        min-height: 44px;
+
+        margin-top: 12px;
+
+        font-size: 9px;
+    }
+
+
+    /* -----------------------------------------
+       CONSULTATION
+    ----------------------------------------- */
+
+    .hair-test-modal-body
+    .consultation-card {
+
+        grid-template-columns:
+            auto 1fr;
+
+        gap: 10px;
+
+        padding: 15px;
+
+        border-radius: 15px;
+    }
+
+
+    .hair-test-modal-body
+    .doctor-icon {
+
+        width: 40px;
+        height: 40px;
+    }
+
+
+    .hair-test-modal-body
+    .consultation-eyebrow {
+
+        font-size: 9px;
+
+        line-height: 1.3;
+    }
+
+
+    .hair-test-modal-body
+    .consultation-card h3 {
+
+        font-size: 15px;
+    }
+
+
+    .hair-test-modal-body
+    .consultation-card p {
+
+        font-size: 10px;
+
+        line-height: 1.55;
+    }
+
+
+    .hair-test-modal-body
+    .consultation-btn {
+
+        width: 100%;
+
+        min-height: 45px;
+
+        font-size: 9px;
+    }
+
+
+    /* -----------------------------------------
+       ACTIONS
+    ----------------------------------------- */
+
+    .hair-test-modal-body
+    .step-actions {
+
+        gap: 8px;
+
+        margin-top: 18px;
+    }
+
+
+    .hair-test-modal-body
+    .back-btn {
+
+        min-height: 44px;
+
+        padding:
+            9px 12px;
+
+        border-radius: 11px;
+
+        font-size: 11px;
+    }
+
+
+    /* -----------------------------------------
+       DISCLAIMER
+    ----------------------------------------- */
+
+    .hair-test-modal-body
+    .result-disclaimer {
+
+        font-size: 9px;
+
+        line-height: 1.5;
+    }
+
+
+    .hair-test-modal-body
+    .restart-btn {
+
+        font-size: 10px;
+    }
+
+}
+
+
+/* =========================================================
+   24. VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+
+    .admin-portal-btn {
+
+        padding:
+            6px 8px;
+
+        font-size: 8px;
+    }
+
+
+    .admin-portal-icon {
+
+        display: none;
+    }
+
+
+    .hair-test-modal-body
+    .step-heading h2,
+    .hair-test-modal-body
+    .lead-heading h2 {
+
+        font-size: 25px;
+    }
+
+
+    .hair-test-modal-body
+    .stage-card h3 {
+
+        font-size: 11px;
+    }
+
+
+    .hair-test-modal-body
+    .stage-card p {
+
+        font-size: 8px;
+    }
+
+
+    .hair-test-modal-body
+    .question-card h2 {
+
+        font-size: 20px;
+    }
+
+
+    .hair-test-modal-body
+    .result-top h2 {
+
+        font-size: 25px;
+    }
+
+}
+
+
+/* =========================================================
+   25. ACCESSIBILITY
+========================================================= */
+
+.hair-test-modal
+button:focus-visible,
+.hair-test-modal
+input:focus-visible,
+.hair-test-modal
+select:focus-visible {
+
+    outline:
+        3px solid rgba(255,107,26,0.25);
+
+    outline-offset: 2px;
+}
+
+
+/* =========================================================
+   26. REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .hair-test-modal,
+    .hair-test-modal-dialog,
+    .hair-test-modal-body .test-step,
+    .admin-portal-btn,
+    .hair-test-modal-close,
+    .hair-test-modal-body button {
+
+        transition: none !important;
+
+        animation: none !important;
+    }
+
+}.result-brand {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.result-brand-logo {
+    width: 145px;
+    height: auto;
+    max-height: 55px;
+    object-fit: contain;
+}
+
+@media (max-width: 600px) {
+    .result-brand-logo {
+        width: 115px;
+        max-height: 45px;
+    }
+}.hair-test-modal-logo {
+    width: 145px;
+    height: auto;
+    max-height: 48px;
+    object-fit: contain;
+}
+
+@media (max-width: 600px) {
+    .hair-test-modal-logo {
+        width: 120px;
+        max-height: 42px;
+    }
+}
